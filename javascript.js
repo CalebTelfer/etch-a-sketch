@@ -14,13 +14,13 @@ function changeColour(div) {
     const randomNumber = getRandomInt(6);
     let randomColour;
     
-    const blue = "#0000FF"
-    const red = "FFCB03";
-    const green = "#00FF00";
-    const orange = "#FFA500";
-    const yellow = "#FFFF00";
-    const purple = "#A020F0";
-    const brown = "#964B00";
+    const blue = "rgb(0,0,255)";
+    const red = "rgb(255, 0, 0)";
+    const green = "rgb(55, 255, 0)";
+    const orange = "rgb(255, 140, 0)";
+    const yellow = "rgb(225, 255, 0)";
+    const purple = "rgb(90, 0, 179)";
+    const brown = "rgb(86, 48, 24)";
 
     switch(randomNumber) {
         case 0: randomColour = blue; break;
@@ -32,7 +32,11 @@ function changeColour(div) {
         case 0: randomColour = brown; break;
     }
 
-    div.style.backgroundColor = randomColour;
+    if (randomColour == div.style.backgroundColor) {
+        changeColour(div); //recall function if selected same colour.
+    } else {
+        div.style.backgroundColor = randomColour;
+    }
 
 }
 
