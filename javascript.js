@@ -1,16 +1,11 @@
 const container = document.querySelector(".flex-container");
 
+const gridButton = document.querySelector("#grid-button");
+gridButton.addEventListener("click", function(e) { updateGrid(1) });
 
-//create 16 divs, add to container div.
-for (let i =0; i < 16; i++) {
-    let div = document.createElement("div")
-    div.setAttribute("class", "gridBox");
-    div.addEventListener("mouseenter" , function (e) {changeColour(div)});
+updateGrid(0); //init grid. (4x4)
 
-    container.appendChild(div);
-}
-
-function changeColour(div) {
+function changeBoxColour(div) {
     const randomNumber = getRandomInt(6);
     let randomColour;
     
@@ -33,7 +28,7 @@ function changeColour(div) {
     }
 
     if (randomColour == div.style.backgroundColor) {
-        changeColour(div); //recall function if selected same colour.
+        changeBoxColour(div); //recall function if selected same colour.
     } else {
         div.style.backgroundColor = randomColour;
     }
@@ -42,4 +37,44 @@ function changeColour(div) {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
+}
+
+function updateGrid(mode) {
+    let newSideLength, newGridBoxSizes;
+
+    if (mode == 1) {    // user requesting change to existing grid.
+        newSideLength = prompt("How many squares per size for the new grid?", "1-100");
+
+        if (newSideLength > 100 || newSideLength < 0) { return alert("Invalid number"); };
+    
+        let boxes = document.querySelectorAll(".gridBox");
+    
+        for (let i = 0; i < boxes.length; i++) {
+            boxes[i].remove();
+        }
+
+        newGridBoxSizes = (600 / newSideLength).toString() +"px"; // container size is 600x600
+
+    
+
+
+    } else if (mode == 0) { // refreshing page or first vist, create grid with default values.
+        newSideLength = 4; 
+        newGridBoxSizes = "150px";
+    } 
+
+
+    let numBoxes = newSideLength * newSideLength;
+
+    for (let i =0; i < numBoxes; i++) {
+        let div = document.createElement("div")
+        div.setAttribute("class", "gridBox");
+        div.addEventListener("mouseenter" , function (e) {changeBoxColour(div)});
+
+        div.style.height = newGridBoxSizes;
+        div.style.width = newGridBoxSizes;
+    
+        container.appendChild(div);
+    }
+
 }
