@@ -1,3 +1,7 @@
+body {
+    background-color: beige;
+}
+
 .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -7,7 +11,7 @@
     background-color: blue;
 }
 
-.gridBox {
+#gridBox {
     flex:auto;
     height: 148px;
     width: 148px;
@@ -15,4 +19,13 @@
     border-color: black;
     border: solid;
     border-width: 1px;
+}
+
+#header-div {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    padding: 10px;
+    margin: 10px 200px;
+    background-color: rgb(251, 189, 96);
 }
